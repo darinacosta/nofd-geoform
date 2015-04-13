@@ -185,7 +185,7 @@ var testTrigger = function() {
 
 
 var questionDisplayControl = function(){
-   var formFields = ['LOT_VACANT', 'BLIGHTED_DANGEROUS', 'HOME_VACANT','COMMERCIAL','ANYONE_HOME','SMOKE_ALARM','ALARM_WORKS','CAN_WE_INSTALL']
+   var formFields = ['LOT_VACANT', 'HOME_VACANT','COMMERCIAL','ANYONE_HOME','SMOKE_ALARM','ALARM_WORKS','CAN_WE_INSTALL']
    var hideQuestionsBelow = function(id){
     $('.panel-body').click(function() {
       if($('#' + id + 'Yes').is(':checked')) { 
@@ -196,17 +196,13 @@ var questionDisplayControl = function(){
       }
     });
    }
+   
+    $('#submitButton').click(function(){
+        $( ".geoFormQuestionare" ).css('display', 'block')
+    })
 
 
-  /*$('.panel-body').click(function() {
-      console.log("panel body clicked")
-      if($('#LOT_VACANTYes').is(':checked')) { 
-        console.log('HEY')
-        $( ".geoFormQuestionare" ).has( '[id^="LOT_VACANT"]' ).nextAll().css( "display", "none" )
-      } else if($('#LOT_VACANTNo').is(':checked')) { 
-        $( ".geoFormQuestionare" ).has( "[id^=LOT_VACANT]" ).nextAll().css( "display", "block" )
-      }
-    });*/
+
    $.each(formFields, function(i, v){
       hideQuestionsBelow(v);
    })
