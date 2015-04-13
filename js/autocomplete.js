@@ -224,7 +224,9 @@ var questionDisplayControl = function(){
 }
 
  var clickInterval = setInterval(function() {
-    testTrigger();
-    questionDisplayControl();
-        clearInterval(clickInterval);
-    }, 3000)
+    if($('#address').length > 0){
+      testTrigger();
+      questionDisplayControl();
+      clearInterval(clickInterval);
+      } 
+    }, 1000)
