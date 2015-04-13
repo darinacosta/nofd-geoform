@@ -35,13 +35,6 @@
         </div>
                    
         <div class="col-md-12 col-lg-10 col-lg-offset-1">
-            <h2 class="geoformSection">
-                ${user.geoFormGeneralTabText}</h2>
-            <div class="panel panel-default">
-              <div class="panel-body">
-                <form role="form" id="userForm"></form>
-              </div>
-            </div>
             <h2 id="select_location" class="geoformSection">
                 ${user.locationInformationText}</h2>
             <p id="locationOptionDescriptor">
@@ -133,6 +126,14 @@
             <div class="gf-map panel panel-default" id="map_container">
                 <div id="mapDiv" class="map-div"></div>
             </div>
+            <h2 class="geoformSection">
+                ${user.geoFormGeneralTabText}</h2>
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <form role="form" id="userForm"></form>
+              </div>
+            </div>
+            
             <h2 class="geoformSection">${user.submitInformationText}</h2>
             <p>${user.submitInstructions}</p>
             <div id="connection_status"></div>

@@ -1,8 +1,6 @@
- /*****************DJACOSTA EDITS BEGIN*********************/
+var testTrigger = function() {
 
-define(["application/wrapper/builder-jquery-deps"], function(){
-
- var testTrigger = function() {
+        console.log('test trigger')
         
         // Add styles
         //$("head").append("<link id='autogeo-style' href='../css/autogeo.css' type='text/css' rel='stylesheet' />");
@@ -11,7 +9,7 @@ define(["application/wrapper/builder-jquery-deps"], function(){
         var addressInput = $('input[id="searchInput"]');
         
         // Add wait icon
-        addressInput.after('<span id="geo-loader" style="display: none;"><img src="../images/axloader.gif"></span>');
+        addressInput.after('<span id="geo-loader" style="display: none;"><img src="images/select2-spinner.gif"></span>');
         
         // Auto geocoder for Address/Location input field
         addressInput.autocomplete({
@@ -159,7 +157,7 @@ define(["application/wrapper/builder-jquery-deps"], function(){
                             $("#geo-loader").hide();
                             return {
                                 label: listItem.address,        // appears in dropdown box
-                                value: listItem.address,        // inserted into input element when selected
+                                value: listItem.address + ", New Orleans LA",        // inserted into input element when selected
                                 geocode: listItem               // all geocode data: used in select callback event
                             }
                         }));
@@ -184,5 +182,38 @@ define(["application/wrapper/builder-jquery-deps"], function(){
     };
 
 
-  return testTrigger();
-})
+
+
+var questionDisplayControl = function(){
+   var formFields = ['LOT_VACANT', 'BLIGHTED_DANGEROUS', 'HOME_VACANT','COMMERCIAL','ANYONE_HOME','SMOKE_ALARM','ALARM_WORKS','CAN_WE_INSTALL']
+   var hideQuestionsBelow = function(id){
+    $('.panel-body').click(function() {
+      if($('#' + id + 'Yes').is(':checked')) { 
+        console.log('HEY')
+        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "none" )
+      } else if($('#' + id + 'No').is(':checked')) { 
+        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "block" )
+      }
+    });
+   }
+
+
+  /*$('.panel-body').click(function() {
+      console.log("panel body clicked")
+      if($('#LOT_VACANTYes').is(':checked')) { 
+        console.log('HEY')
+        $( ".geoFormQuestionare" ).has( '[id^="LOT_VACANT"]' ).nextAll().css( "display", "none" )
+      } else if($('#LOT_VACANTNo').is(':checked')) { 
+        $( ".geoFormQuestionare" ).has( "[id^=LOT_VACANT]" ).nextAll().css( "display", "block" )
+      }
+    });*/
+   $.each(formFields, function(i, v){
+      hideQuestionsBelow(v);
+   })
+}
+
+ var clickInterval = setInterval(function() {
+    testTrigger();
+    questionDisplayControl();
+        clearInterval(clickInterval);
+    }, 3000)
