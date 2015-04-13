@@ -185,8 +185,10 @@ var testTrigger = function() {
 
 
 var questionDisplayControl = function(){
-   var formFields = ['LOT_VACANT', 'HOME_VACANT','COMMERCIAL','ANYONE_HOME','SMOKE_ALARM','ALARM_WORKS','CAN_WE_INSTALL']
-   var hideQuestionsBelow = function(id){
+   var affirmativeFormFields = ['LOT_VACANT', 'HOME_VACANT','COMMERCIAL','SMOKE_ALARM','ALARM_WORKS'],
+       neggativeFormFields = ['ANYONE_HOME', 'CAN_WE_INSTALL'],
+
+   affirmativeHideQuestionsBelow = function(id){
     $('.panel-body').click(function() {
       if($('#' + id + 'Yes').is(':checked')) { 
         console.log('HEY')
@@ -195,16 +197,29 @@ var questionDisplayControl = function(){
         $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "block" )
       }
     });
-   }
+   },
+
+   neggativeHideQuestionsBelow = function(id){
+    $('.panel-body').click(function() {
+      if($('#' + id + 'No').is(':checked')) { 
+        console.log('HEY')
+        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "none" )
+      } else if($('#' + id + 'Yes').is(':checked')) { 
+        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "block" )
+      }
+    });
+   };
    
     $('#submitButton').click(function(){
         $( ".geoFormQuestionare" ).css('display', 'block')
     })
 
+   $.each(affirmativeFormFields, function(i, v){
+      affirmativeHideQuestionsBelow(v);
+   })
 
-
-   $.each(formFields, function(i, v){
-      hideQuestionsBelow(v);
+   $.each(neggativeFormFields, function(i, v){
+      neggativeHideQuestionsBelow(v);
    })
 }
 
