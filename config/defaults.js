@@ -5,14 +5,29 @@ define({
     "appid": "",
     "webmap": "239beb3874bd4251a38f817ed093678f",
     "form_layer": {
-        "id": ""
+        "id": "nofd_geoform_with_domains_map_v2_8749"
     },
     "details": {
-        "Title": "",
-        "Logo": "",
+        "Title": "NOFD Smoke Detector Survey",
+        "Logo": "http://gis.nola.gov/files/smoke-detector.png",
         "Description": ""
     },
     "fields": {
+      "nofd_geoform_with_domains_map_v2_8749": [
+        //{"name":"Address", "alias":"Location Address","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
+        {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"BLIGHTED_DANGEROUS","alias":"Is it blighted or dangerous?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"HOME_VACANT","alias":"Is the home vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"COMMERCIAL","alias":"Is the property commercial?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"RESIDENTIAL_UNIT_NUMBER","alias":"How many residential units are there?","isEditable":true,"tooltip":"","visible":true,"format":null},
+        {"name":"ANYONE_HOME","alias":"Is anyone home?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"SMOKE_ALARM","alias":"Are there smoke alarms?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"ALARM_WORKS","alias":"Do the smoke alarms work?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"CAN_WE_INSTALL","alias":"Can you install smoke alarms?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name": "NUM_ALARMS", "alias": "How many smoke alarms did you install?","isEditable":true,"tooltip":"","visible":true,"format":null},
+        {"name":"NUM_BATTERIES","alias":"How many batteries did you install?","isEditable":true,"tooltip":"","visible":true,"format":null}
+
+      ]
     },
     "theme": "bootstrap", // see values in themes.js
     "oauthappid": null,
@@ -27,8 +42,8 @@ define({
     //Defaults to arcgis.com. Set this value to your portal or organization host name.
     "sharinghost": location.protocol + "//" + "www.arcgis.com",
     "units": null,
-    "useSmallHeader": false,
-    "enableSharing": true,
+    "useSmallHeader": true,
+    "enableSharing": false,
     "defaultMapExtent": true,
     "pushpinColor": "blue",
     "nextBasemap": "hybrid",
@@ -61,7 +76,7 @@ define({
             "url": null
         },
         "geocode": [{
-            "url": null
+            "url": "http://gis.nola.gov:6080/arcgis/rest/services/Staging/CompositePIN3/GeocodeServer"
         }]
     },
     "bitlyLogin": "esri",

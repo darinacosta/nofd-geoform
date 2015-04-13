@@ -136,10 +136,10 @@
         //$("head").append("<link id='autogeo-style' href='../css/autogeo.css' type='text/css' rel='stylesheet' />");
         
         // Target Address/Location input field
-        var addressInput = $('input[id="Address"]');
+        var addressInput = $('input[id="searchInput"]');
         
         // Add wait icon
-        addressInput.after('<span id="geo-loader" style="display: none;"><img src="../images/axloader.gif"></span>');
+        addressInput.after('<span id="geo-loader" style="display: none;"><img src="images/select2-spinner.gif"></span>');
         
         // Auto geocoder for Address/Location input field
         addressInput.autocomplete({
@@ -287,7 +287,7 @@
                             $("#geo-loader").hide();
                             return {
                                 label: listItem.address,        // appears in dropdown box
-                                value: listItem.address,        // inserted into input element when selected
+                                value: listItem.address + ", New Orleans LA",        // inserted into input element when selected
                                 geocode: listItem               // all geocode data: used in select callback event
                             }
                         }));
