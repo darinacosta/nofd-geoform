@@ -8,7 +8,7 @@ define({
         "id": "nofd_geoform_with_domains_map_v2_8749"
     },
     "details": {
-        "Title": "NOFD Smoke Detector Survey",
+        "Title": "NOFD Smoke Alarm Survey",
         "Logo": "http://gis.nola.gov/files/smoke-detector.png",
         "Description": ""
     },
