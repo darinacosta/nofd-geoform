@@ -185,7 +185,7 @@ var testTrigger = function() {
 
 
 var questionDisplayControl = function(){
-   var affirmativeFormFields = ['LOT_VACANT', 'HOME_VACANT','COMMERCIAL','SMOKE_ALARM','ALARM_WORKS'],
+   var affirmativeFormFields = ['LOT_VACANT', 'HOME_VACANT', 'SMOKE_ALARM','ALARM_WORKS'],
        neggativeFormFields = ['ANYONE_HOME', 'CAN_WE_INSTALL'],
 
    affirmativeHideQuestionsBelow = function(id){

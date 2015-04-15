@@ -5,7 +5,7 @@ define({
     "appid": "",
     "webmap": "239beb3874bd4251a38f817ed093678f",
     "form_layer": {
-        "id": "nofd_geoform_with_domains_map_v2_8749"
+        "id": "nofd_geoform_with_domains_layer_v2_7216"
     },
     "details": {
         "Title": "NOFD Smoke Alarm Survey",
@@ -13,7 +13,7 @@ define({
         "Description": ""
     },
     "fields": {
-      "nofd_geoform_with_domains_map_v2_8749": [
+      "nofd_geoform_with_domains_layer_v2_7216": [
         //{"name":"Address", "alias":"Location Address","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"BLIGHTED_DANGEROUS","alias":"Is it blighted or dangerous?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
