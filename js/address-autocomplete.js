@@ -193,7 +193,7 @@ var questionDisplayControl = function(){
        occupantFields = ['OCC_NAME','OCC_PHONE','OCC_NUM'],
 
    affirmativeHideQuestionsBelow = function(id){
-    $('.panel-body').click(function() {
+     $.each(affirmativeFormFields, function(i, v){
       if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
         console.log('HEY')
         $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "none" )
@@ -204,7 +204,7 @@ var questionDisplayControl = function(){
    },
 
    neggativeHideQuestionsBelow = function(id){
-    $('.panel-body').click(function() {
+    $.each(neggativeFormFields, function(i, v){
       if($('#' + id + 'No').is(':checked')) { 
         console.log('HEY')
         $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().css( "display", "none" )
@@ -214,19 +214,36 @@ var questionDisplayControl = function(){
     });
    },
 
+   displayOccupantInformation = function(id){
+        if ($("#CAN_WE_INSTALLYes").is(':checked')){
+          $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).css( "display", "block" );  
+        }else{
+          $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).css( "display", "none" );   
+        }
+   }
+
    
    init = (function(){
+        $( ".geoFormQuestionare" ).has( '[id^="OCC_"]' ).css( "display", "none" );  
+
         $('#submitButton').click(function(){
           $( ".geoFormQuestionare" ).css('display', 'block')
         })
+        
+        $('.panel-body').click(function(){
+           $.each(affirmativeFormFields, function(i, v){
+              affirmativeHideQuestionsBelow(v);
+           })
 
-       $.each(affirmativeFormFields, function(i, v){
-          affirmativeHideQuestionsBelow(v);
-       })
+           $.each(neggativeFormFields, function(i, v){
+              neggativeHideQuestionsBelow(v);
+           })
 
-       $.each(neggativeFormFields, function(i, v){
-          neggativeHideQuestionsBelow(v);
-       })
+           $.each(occupantFields, function(i, v){
+              displayOccupantInformation(v);
+           })
+
+        })
    })();
 },
 
