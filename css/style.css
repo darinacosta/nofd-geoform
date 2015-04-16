@@ -14,6 +14,10 @@
     display:none;
 }
 
+#Address_label_2, #Address{
+    display:none;
+}
+
 
 /**DJACOSTA EDITS: JQUERY UI**8/
 
