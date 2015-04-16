@@ -5,7 +5,7 @@ define({
     "appid": "",
     "webmap": "239beb3874bd4251a38f817ed093678f",
     "form_layer": {
-        "id": "nofd_geoform_with_domains_layer_v2_7216"
+        "id": "nofd_geoform_v3_2485"
     },
     "details": {
         "Title": "NOFD Smoke Alarm Survey",
@@ -13,13 +13,15 @@ define({
         "Description": ""
     },
     "fields": {
-      "nofd_geoform_with_domains_layer_v2_7216": [
-        //{"name":"Address", "alias":"Location Address","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
+      "nofd_geoform_v3_2485": [
+        {"name":"MEMBER","alias":"Your name (last name first):","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
+        {"name":"COMPANY","alias":"Your company:","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
+        {"name":"Address", "alias":"Location address:","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"BLIGHTED_DANGEROUS","alias":"Is it blighted or dangerous?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"HOME_VACANT","alias":"Is the home vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"COMMERCIAL","alias":"Is the property commercial?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
-        {"name":"RESIDENTIAL_UNIT_NUMBER","alias":"How many residential units are there?","isEditable":true,"tooltip":"","visible":true,"format":null},
+        {"name":"RESIDENTIAL_UNIT_NUMBER","alias":"Housing unit number?","isEditable":true,"tooltip":"","visible":true,"format":null},
         {"name":"ANYONE_HOME","alias":"Is anyone home?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"SMOKE_ALARM","alias":"Are there smoke alarms?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"ALARM_WORKS","alias":"Do the smoke alarms work?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
