@@ -14,8 +14,16 @@
     display:none;
 }
 
+.cnoHide{
+    display:none;
+}
+
 #Address_label_2, #Address{
     display:none;
+}
+
+.error{
+    color:red;
 }
 
 

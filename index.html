@@ -69,6 +69,7 @@
     </script>
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/vendor/jquery.validate.min.js"></script>
     <script type="text/javascript" src="//js.arcgis.com/3.13"></script>
     <script type="text/javascript" src="js/vendor/offline/offline.min.js"></script>
     <script type="text/javascript" src="js/offlineOptions.js"></script>
@@ -109,8 +110,11 @@
             });
         });
     </script>
-    <script type="text/javascript" src="js/address-autocomplete.js"></script>
-    
+    <script>
+      var cno = {} //global object to store custom CNO properties
+    </script>
+    <script type="text/javascript" src="js/custom-cno/cno-address-autocomplete_v1.js"></script>
+    <script type="text/javascript" src="js/custom-cno/cno-form-control_v1.js"></script>
     <!-- Google Analytics -->
     <script type="text/javascript">
         var _gaq = _gaq || [];
