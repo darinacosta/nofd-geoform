@@ -1854,11 +1854,11 @@ define([
                        /////////////////////////////////////////////////////////////////////////////
                         
 
-                        if ($('input[required]:text').val().length !== 0){
+                        //if ($('input[required]:text').val().length !== 0){
                           this._submitForm();
-                        }else{
+                        /*}else{
                           console.log('CNO: Unable to submit.')
-                        }
+                        }*/
                     }));
                 }
                 // set location options

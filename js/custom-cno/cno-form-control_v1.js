@@ -43,6 +43,7 @@ cno.questionDisplayControl = function(){
         $( ".geoFormQuestionare" ).has( '[id^="OCC_"]' ).addClass( "cnoHide" );  
         $('#submitButton').click(function(){
           $( ".geoFormQuestionare" ).removeClass('cnoHide')
+          $( ".geoFormQuestionare" ).has( '[id^="OCC_"]' ).addClass( "cnoHide" );  
         })
         $('.panel-body').click(function(){
            $.each(affirmativeFormFields, function(i, v){
@@ -85,8 +86,9 @@ cno.validateForm = function(){
   };
 
   $('.geoformSection').on('click', function(){
-    $(_generateValidationString()).prop("required", true);
-    $(_generateValidationString()).valid();
+    $(_generateValidationString()).parent().addClass("mandatory");
+    console.log('validated')
+    //$(_generateValidationString()).valid();
   })
 };
 
