@@ -85,10 +85,9 @@ cno.validateForm = function(){
     return string; 
   };
 
-  $('.geoformSection').on('click', function(){
+  $('body').on('click', function(){
     $(_generateValidationString()).parent().addClass("mandatory");
     console.log('validated')
-    //$(_generateValidationString()).valid();
   })
 };
 
