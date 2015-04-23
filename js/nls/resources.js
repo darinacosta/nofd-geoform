@@ -51,7 +51,7 @@ define({
       geoFormGeneralTabText: "${formSection} Enter Information",
       locationInformationText: "${formSection} Select Location",
       submitInformationText: "${formSection} Complete Form",
-      submitInstructions: "Add this information to the map.",
+      submitInstructions: "", //"Add this information to the map.",
       myLocationText: "Current Location",
       locationDescriptionForMoreThanOneOption: "Specify the location for this entry by clicking/tapping the map or by using one of the following options.",
       locationDescriptionForOneOption: "Specify the location for this entry by clicking/tapping the map or by using the following option.",

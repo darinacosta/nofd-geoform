@@ -5,14 +5,15 @@ cno.questionDisplayControl = function(){
   var affirmativeFormFields = ['LOT_VACANT', 'HOME_VACANT', 'SMOKE_ALARM','ALARM_WORKS', 'COMMERCIAL'],
       neggativeFormFields = ['ANYONE_HOME', 'CAN_WE_INSTALL'],
       occupantFields = ['OCC_NAME','OCC_PHONE','OCC_NUM'],
+      $geoFormQuestionare = $( ".geoFormQuestionare" ),
 
   //Hide all questions below the current question if response is 'yes'
   _affirmativeHideQuestionsBelow = function(id){
      $.each(affirmativeFormFields, function(i, v){
       if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
-        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+        $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
       } else if($('#' + id + 'No, [id="' + id +'Yes (commercial/residential, more than 3 units)"]').is(':checked')) { 
-        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+        $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
       }
     });
    },
@@ -21,9 +22,9 @@ cno.questionDisplayControl = function(){
    _neggativeHideQuestionsBelow = function(id){
     $.each(neggativeFormFields, function(i, v){
       if($('#' + id + 'No').is(':checked')) { 
-        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+        $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
       } else if($('#' + id + 'Yes').is(':checked')) { 
-        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+        $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
       }
     });
    },
@@ -31,19 +32,19 @@ cno.questionDisplayControl = function(){
    //Display occupant information fields if a fire alarm can be installed
    _displayOccupantInformation = function(id){
       if ($("#CAN_WE_INSTALLYes").is(':checked')){
-        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).removeClass( "cnoHide" );  
+        $geoFormQuestionare.has( '[id^="' + id + '"]' ).removeClass( "cnoHide" );  
       }else{
-        $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).addClass( "cnoHide" );   
+        $geoFormQuestionare.has( '[id^="' + id + '"]' ).addClass( "cnoHide" );   
       }
    },
 
    //Initialize question display control
    _init = (function(){
         console.log('Initialize CNO question display control.')
-        $( ".geoFormQuestionare" ).has( '[id^="OCC_"]' ).addClass( "cnoHide" );  
+        $geoFormQuestionare.has( '[id^="OCC_"]' ).addClass( "cnoHide" );  
         $('#submitButton').click(function(){
-          $( ".geoFormQuestionare" ).removeClass('cnoHide')
-          $( ".geoFormQuestionare" ).has( '[id^="OCC_"]' ).addClass( "cnoHide" );  
+          $geoFormQuestionare.removeClass('cnoHide')
+          $geoFormQuestionare.has( '[id^="OCC_"]' ).addClass( "cnoHide" );  
         })
         $('.panel-body').click(function(){
            $.each(affirmativeFormFields, function(i, v){
@@ -58,6 +59,69 @@ cno.questionDisplayControl = function(){
         })
    })();
 };
+
+cno.buildReport = function(){
+  var _parseName = function(name){
+    if (name.indexOf(", ") >= 0){
+      var nameArray = name.split(', '),
+          nameString = nameArray[1] + ' ' + nameArray[0];
+          return nameString; 
+    } else {
+      return name
+    }
+  },
+
+  _alarmRequired = function(){
+    var affirmativeFormFields = ['LOT_VACANT', 'HOME_VACANT', 'SMOKE_ALARM','ALARM_WORKS', 'COMMERCIAL'];
+          neggativeFormFields = ['ANYONE_HOME', 'CAN_WE_INSTALL'],
+          status = 'yes';
+    $.each(affirmativeFormFields, function(n, id){
+      if ($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
+        console.log('returning false')
+        status = 'no'; 
+      }
+    });
+    $.each(neggativeFormFields, function(n, id){
+      if($('#' + id + 'No').is(':checked')) { 
+        console.log('returning false')
+        status = 'no';
+      }
+    });
+    return status;
+  },
+  
+  _buildReportString = function(){
+    $('body').on('click', function(){
+      var member = $('input#MEMBER').val().length > 0 ? _parseName($('input#MEMBER').val()) : false,
+          company = $('input#COMPANY').val().length > 0 ? $('input#COMPANY').val() : false,
+          address = $('input#searchInput').val().length > 0 ? $('input#searchInput').val() : false, 
+          numberOfAlarms = $('input#NUM_ALARMS').val().length > 0 ? $('input#NUM_ALARMS').val() : false,
+          reportString = function(){
+            var string = '<b>' + member + '</b> of <b>' + company + '</b> has surveyed <b>' + address + '</b>';
+            if (_alarmRequired() !== 'yes'){
+              string += ' and determined that an alarm was not required.';
+            } else if (numberOfAlarms) {
+              console.log(numberOfAlarms)
+              alarmPhrase = numberOfAlarms === '1' ? ' alarm.' : ' alarms.' 
+              string += ' and installed ' + numberOfAlarms + alarmPhrase
+            } else {
+              string += '.'
+            }
+            return string;
+          }
+      if (member !== false && company !== false && address !== false){    
+        $('#user-report').html(reportString());
+      } else {
+        return false;
+      }
+    });
+  },
+
+  _init = (function(){
+    $('h2:contains("3. Complete Form")').after('<div id="user-report"></div>');
+    _buildReportString();
+  })();
+}
 
 /*Grab the address string provided in the main address search bar and add it to 
 the hidden address field so that it is added to the attributes of the service*/ 
@@ -87,13 +151,13 @@ cno.validateForm = function(){
 
   $('body').on('click', function(){
     $(_generateValidationString()).parent().addClass("mandatory");
-    console.log('validated')
   })
 };
 
 cno.initializeFormControl = setInterval(function() { 
   //Document.ready executes too early; this function checks every second to ensure that all fields exist before executing.  
   if($('#NUM_BATTERIES').length > 0){
+    cno.buildReport();
     $( "#MEMBER" ).autocomplete({
       source: cno.personnel
     });

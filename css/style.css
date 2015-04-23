@@ -10,6 +10,11 @@
     height:44px;
   }
 
+.ui-helper-hidden-accessible { display:none; }
+
+#user-report{
+}
+
 #appDescription {
     display:none;
 }
