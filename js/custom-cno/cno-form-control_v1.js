@@ -73,17 +73,15 @@ cno.buildReport = function(){
 
   _alarmRequired = function(){
     var affirmativeFormFields = ['LOT_VACANT', 'HOME_VACANT', 'SMOKE_ALARM','ALARM_WORKS', 'COMMERCIAL'];
-          neggativeFormFields = ['ANYONE_HOME', 'CAN_WE_INSTALL'],
-          status = 'yes';
+        neggativeFormFields = ['ANYONE_HOME', 'CAN_WE_INSTALL'],
+        status = 'yes';
     $.each(affirmativeFormFields, function(n, id){
       if ($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
-        console.log('returning false')
         status = 'no'; 
       }
     });
     $.each(neggativeFormFields, function(n, id){
       if($('#' + id + 'No').is(':checked')) { 
-        console.log('returning false')
         status = 'no';
       }
     });
@@ -121,7 +119,7 @@ cno.buildReport = function(){
     $('h2:contains("3. Complete Form")').after('<div id="user-report"></div>');
     _buildReportString();
   })();
-}
+};
 
 /*Grab the address string provided in the main address search bar and add it to 
 the hidden address field so that it is added to the attributes of the service*/ 

@@ -165,7 +165,7 @@ cno.addressAutocomplete = function() {
 
             // When Address/Location in auto-complete drop-down is selected
             select: function(event,ui){
-                
+
                 // Close drop-down
                 addressInput.autocomplete("close");
                 
@@ -174,7 +174,13 @@ cno.addressAutocomplete = function() {
                 
                 // Update Lat/Long fields
                 $('input[name="latitude"]').val(ui.item.geocode.lat);
-                $('input[name="longitude"]').val(ui.item.geocode.lng);                      
+                $('input[name="longitude"]').val(ui.item.geocode.lng); 
+
+                //djacosta edit: locate address
+                if ($('button#searchSubmit').length > 0){
+                  $('#searchSubmit')[0].click();
+                  console.log('click')
+                }                     
             }
         });
     };
