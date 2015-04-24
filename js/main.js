@@ -1849,16 +1849,9 @@ define([
                 if (submitButtonNode) {
                     on(submitButtonNode, "click", lang.hitch(this, function () {
                         
-                         /////////////////////////////////////////////////////////////////////////////
-                        /*-------------------- DJACOSTA EDITS 4/2015 ----------------------------- */
-                       /////////////////////////////////////////////////////////////////////////////
-                        
-
-                        //if ($('input[required]:text').val().length !== 0){
+            
                           this._submitForm();
-                        /*}else{
-                          console.log('CNO: Unable to submit.')
-                        }*/
+                    
                     }));
                 }
                 // set location options

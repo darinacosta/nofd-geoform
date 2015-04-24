@@ -136,7 +136,7 @@ cno.validateForm = function(){
   _generateValidationString = function(){
     var string = '';
     $.each(_fieldsToValidateArray, function(n,id){
-      if ($('[id^="' + id + '"]').css('display') != 'none'){
+      if (!$('[id^="' + id + '"]').parent().hasClass('cnoHide')){
         if (n == 0){
           string += '#' + id 
         } else {
@@ -144,6 +144,7 @@ cno.validateForm = function(){
         }
       } 
     });
+    console.log(string)
     return string; 
   };
 
