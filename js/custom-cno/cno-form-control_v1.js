@@ -130,6 +130,38 @@ cno.populateHiddenAddressField = function(){
   })
 };
 
+cno.populateDateField = function(){
+  var now     = new Date(); 
+  var year    = now.getFullYear();
+  var month   = now.getMonth()+1; 
+  var day     = now.getDate();
+  var hour    = now.getHours();
+  var minute  = now.getMinutes();
+  var second  = now.getSeconds();
+  var m       = 'am'; 
+  if(month.toString().length == 1) {
+      var month = '0'+month;
+  }
+  if(day.toString().length == 1) {
+      var day = '0'+day;
+  }   
+  if(hour > 12){
+    var hour = hour - 12;
+    var m = 'pm';
+  }
+  if(hour.toString().length == 1) {
+      var hour = '0'+hour;
+  }
+  if(minute.toString().length == 1) {
+      var minute = '0'+minute;
+  }
+  if(second.toString().length == 1) {
+      var second = '0'+second;
+  }   
+  var dateTime = month+'/'+day+'/'+year+' '+hour+':'+minute+' '+m   
+  $('input#SURVEY_DATE').val(dateTime);
+}
+
 cno.validateForm = function(){
   var _fieldsToValidateArray = ['COMPANY', 'MEMBER','OCC_NAME','OCC_PHONE','OCC_NUM'],
   
@@ -166,6 +198,7 @@ cno.initializeFormControl = setInterval(function() {
     cno.addressAutocomplete();
     cno.questionDisplayControl();
     cno.populateHiddenAddressField();
+    cno.populateDateField();
     cno.validateForm();
     clearInterval(cno.initializeFormControl);
   } 
