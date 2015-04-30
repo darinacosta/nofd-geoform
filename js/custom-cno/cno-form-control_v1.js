@@ -60,6 +60,7 @@ cno.questionDisplayControl = function(){
    })();
 };
 
+/*Create a report at the bottom of the page to summarize user input*/
 cno.buildReport = function(){
   var _parseName = function(name){
     if (name.indexOf(", ") >= 0){
@@ -109,8 +110,6 @@ cno.buildReport = function(){
           }
       if (member !== false && company !== false && address !== false){    
         $('#user-report').html(reportString());
-      } else {
-        return false;
       }
     });
   },
