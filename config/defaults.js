@@ -18,7 +18,7 @@ define({
         {"name":"MEMBER","alias":"Your name: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"COMPANY","alias":"Your company: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"Address", "alias":"Location address:","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
-        {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio", "cascade": "affirmative"},
         {"name":"BLIGHTED_DANGEROUS","alias":"Is it blighted or dangerous?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"HOME_VACANT","alias":"Is the home vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"COMMERCIAL","alias":"Is the property commercial?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},

@@ -362,6 +362,37 @@ define([
                 }
             }
         },
+          /*/////////////////
+         //DJACOSTA EDITS///
+        /////////////////*/
+        _affirmativeFormFields: [],
+        _neggativeFormFields: [],
+        _compileCascadeFields: function(){
+
+        },
+        _affirmativeHideQuestionsBelow: function(id){
+         $.each(this._affirmativeFormFields, function(i, v){
+           if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
+             $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+           } else if($('#' + id + 'No, [id="' + id +'Yes (commercial/residential, more than 3 units)"]').is(':checked')) { 
+             $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+           }
+         });
+       },
+        //Hide all questions below the current question if response is 'no'
+        _neggativeHideQuestionsBelow: function(id){
+          $.each(this._neggativeFormFields, function(i, v){
+            if($('#' + id + 'No').is(':checked')) { 
+              $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+            } else if($('#' + id + 'Yes').is(':checked')) { 
+              $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+            }
+          });
+        },
+
+          /*///////////////////////
+         ////END DJACOSTA EDITS//
+        //////////////////////*/
         reportError: function (error) {
             // remove loading class from body
             domClass.remove(document.body, "app-loading");
@@ -551,6 +582,7 @@ define([
         },
         //function to validate and create the form
         _createForm: function (fields) {
+            this._checkForCascade();
             domConstruct.empty(dom.byId('userForm'));
             this.sortedFields = [];
             var formContent, labelContent, matchingField, newAddedFields = [], userFormNode;
@@ -582,6 +614,9 @@ define([
                         matchingField = true;
                     } else if (layerField.name == currentField.name && currentField.hasOwnProperty("visible") && !currentField.visible) {
                         matchingField = true;
+                        //DJACOSTA EDITS
+                    } else if (currentField.cascade === 'affirmative'){
+                        console.log(currentField.name + ', AFFIRMATIVE CASCADE')
                     }
                 }));
                 if (!matchingField) {
