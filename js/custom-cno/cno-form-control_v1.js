@@ -195,7 +195,7 @@ cno.initializeFormControl = setInterval(function() {
        source: cno.companies
     });
     cno.addressAutocomplete();
-    cno.questionDisplayControl();
+    //cno.questionDisplayControl();
     cno.populateHiddenAddressField();
     cno.populateDateField();
     cno.validateForm();

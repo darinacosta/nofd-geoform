@@ -234,6 +234,8 @@ define([
                 // remove class
                 domClass.remove(dom.byId('jumbotronNode'), "jumbotron");
             }
+            //DJACOSTA EDITS
+            this._questionDisplayControl();
         },
         _initPreview: function (node) {
             var cssStyle;
@@ -365,29 +367,43 @@ define([
           /*/////////////////
          //DJACOSTA EDITS///
         /////////////////*/
-        _affirmativeFormFields: [],
-        _neggativeFormFields: [],
-        _compileCascadeFields: function(){
-
-        },
-        _affirmativeHideQuestionsBelow: function(id){
-         $.each(this._affirmativeFormFields, function(i, v){
-           if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
-             $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
-           } else if($('#' + id + 'No, [id="' + id +'Yes (commercial/residential, more than 3 units)"]').is(':checked')) { 
-             $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
-           }
-         });
-       },
-        //Hide all questions below the current question if response is 'no'
-        _neggativeHideQuestionsBelow: function(id){
-          $.each(this._neggativeFormFields, function(i, v){
-            if($('#' + id + 'No').is(':checked')) { 
-              $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
-            } else if($('#' + id + 'Yes').is(':checked')) { 
-              $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
-            }
-          });
+        _questionDisplayControl: function(){
+          var _affirmativeFormFields = [],
+          _neggativeFormFields = [],
+          app = this,
+          _compileCascadeFields = function(){
+            $.each(app._formLayer.fields, function(i, v){
+              if (v.cascade === 'affirmative'){
+                _affirmativeFormFields.push(v.cascade)  
+              }else if (v.cascade === 'neggative'){
+                _neggativeFormFields.push(v.cascade)  
+              }    
+          })
+          },
+          _affirmativeHideQuestionsBelow = function(id){
+           $.each(_affirmativeFormFields, function(i, v){
+             if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
+               $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+             } else if($('#' + id + 'No, [id="' + id +'Yes (commercial/residential, more than 3 units)"]').is(':checked')) { 
+               $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+             }
+           });
+         },
+          //Hide all questions below the current question if response is 'no'
+          _neggativeHideQuestionsBelow = function(id){
+            $.each(_neggativeFormFields, function(i, v){
+              if($('#' + id + 'No').is(':checked')) { 
+                $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+              } else if($('#' + id + 'Yes').is(':checked')) { 
+                $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+              }
+            });
+          },
+          _init = (function(){
+           _compileCascadeFields();
+           _affirmativeHideQuestionsBelow();
+           _neggativeHideQuestionsBelow();   
+          })();
         },
 
           /*///////////////////////
