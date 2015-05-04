@@ -372,26 +372,33 @@ define([
           _neggativeFormFields = [],
           app = this,
           _compileCascadeFields = function(){
-            $.each(app._formLayer.fields, function(i, v){
-              if (v.cascade === 'affirmative'){
-                _affirmativeFormFields.push(v.cascade)  
-              }else if (v.cascade === 'neggative'){
-                _neggativeFormFields.push(v.cascade)  
-              }    
-          })
-          },
-          _affirmativeHideQuestionsBelow = function(id){
-           $.each(_affirmativeFormFields, function(i, v){
+            var intervalCheck = setInterval(function(){
+              if (app._formLayer !== undefined){
+                $.each(app._formLayer.fields, function(i, v){
+                  if (v.cascade === 'affirmative'){
+                    _affirmativeFormFields.push(v.name)  
+                  }else if (v.cascade === 'neggative'){
+                    _neggativeFormFields.push(v.name)  
+                  } 
+                });
+                console.log(_affirmativeFormFields);
+                clearInterval(intervalCheck);
+              }
+            }, 1000);
+          };
+          _affirmativeHideQuestionsBelow = function(){
+           $.each(_affirmativeFormFields, function(n, id){
              if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
-               $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+                console.log(id);
+               $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
              } else if($('#' + id + 'No, [id="' + id +'Yes (commercial/residential, more than 3 units)"]').is(':checked')) { 
-               $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+               $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
              }
            });
          },
           //Hide all questions below the current question if response is 'no'
-          _neggativeHideQuestionsBelow = function(id){
-            $.each(_neggativeFormFields, function(i, v){
+          _neggativeHideQuestionsBelow = function(){
+            $.each(_neggativeFormFields, function(id, v){
               if($('#' + id + 'No').is(':checked')) { 
                 $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
               } else if($('#' + id + 'Yes').is(':checked')) { 
@@ -401,8 +408,10 @@ define([
           },
           _init = (function(){
            _compileCascadeFields();
-           _affirmativeHideQuestionsBelow();
-           _neggativeHideQuestionsBelow();   
+           $('body').on('click', function(){
+             _affirmativeHideQuestionsBelow();
+             _neggativeHideQuestionsBelow(); 
+           })  
           })();
         },
 
@@ -598,7 +607,7 @@ define([
         },
         //function to validate and create the form
         _createForm: function (fields) {
-            this._checkForCascade();
+            this._questionDisplayControl();
             domConstruct.empty(dom.byId('userForm'));
             this.sortedFields = [];
             var formContent, labelContent, matchingField, newAddedFields = [], userFormNode;
@@ -630,9 +639,6 @@ define([
                         matchingField = true;
                     } else if (layerField.name == currentField.name && currentField.hasOwnProperty("visible") && !currentField.visible) {
                         matchingField = true;
-                        //DJACOSTA EDITS
-                    } else if (currentField.cascade === 'affirmative'){
-                        console.log(currentField.name + ', AFFIRMATIVE CASCADE')
                     }
                 }));
                 if (!matchingField) {
