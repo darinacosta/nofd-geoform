@@ -15,15 +15,15 @@ define({
     "fields": {
       "nofd_geoform_v4_398": [
         {"name":"SURVEY_DATE","alias":"Date and time of survey:","isEditable":true,"tooltip":"","visible":true,"format":null},
-        {"name":"MEMBER","alias":"Your name: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
-        {"name":"COMPANY","alias":"Your company: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
+        {"name":"MEMBER","alias":"Your name: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text", "validate": true},
+        {"name":"COMPANY","alias":"Your company: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text", "vaidate": true},
         {"name":"Address", "alias":"Location address:","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio", "cascade": "affirmative"},
         {"name":"BLIGHTED_DANGEROUS","alias":"Is it blighted or dangerous?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"HOME_VACANT","alias":"Is the home vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"COMMERCIAL","alias":"Is the property commercial?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"RESIDENTIAL_UNIT_NUMBER","alias":"Housing unit number?","isEditable":true,"tooltip":"","visible":true,"format":null},
-        {"name":"ANYONE_HOME","alias":"Is anyone home?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
+        {"name":"ANYONE_HOME","alias":"Is anyone home?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio", "cascade": "neggative"},
         {"name":"SMOKE_ALARM","alias":"Are there smoke alarms?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"ALARM_WORKS","alias":"Do the smoke alarms work?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},
         {"name":"CAN_WE_INSTALL","alias":"Can you install smoke alarms?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},

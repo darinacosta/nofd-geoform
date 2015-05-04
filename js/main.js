@@ -236,6 +236,7 @@ define([
             }
             //DJACOSTA EDITS
             this._questionDisplayControl();
+            this._validateForm();
         },
         _initPreview: function (node) {
             var cssStyle;
@@ -367,51 +368,81 @@ define([
           /*/////////////////
          //DJACOSTA EDITS///
         /////////////////*/
+        
+        _validateForm: function(){
+          var app = this,
+          validationArray = [],
+          _fieldValidationArray = function(){
+            $.each(app._formLayer.fields, function(i, v){
+              if (v.validate === true){
+                console.log('VALIDATE ' + v.name)
+              validationArray.push(v.name)
+              }
+            });
+            return validationArray;
+          },
+          _generateValidationString = function(){
+            var string = '';
+            $.each(_fieldValidationArray(), function(n,id){
+              if (!$('[id^="' + id + '"]').parent().hasClass('cnoHide')){
+                if (n == 0){
+                  string += '#' + id 
+                } else {
+                  string += ', #' + id
+                }
+              } 
+            });
+            return string; 
+          };
+
+          $('body').on('click', function(){
+            $(_generateValidationString()).parent().addClass("mandatory");
+          })
+        },
         _questionDisplayControl: function(){
           var _affirmativeFormFields = [],
           _neggativeFormFields = [],
           app = this,
           _compileCascadeFields = function(){
-            var intervalCheck = setInterval(function(){
-              if (app._formLayer !== undefined){
-                $.each(app._formLayer.fields, function(i, v){
-                  if (v.cascade === 'affirmative'){
-                    _affirmativeFormFields.push(v.name)  
-                  }else if (v.cascade === 'neggative'){
-                    _neggativeFormFields.push(v.name)  
-                  } 
-                });
-                console.log(_affirmativeFormFields);
-                clearInterval(intervalCheck);
-              }
-            }, 1000);
+            $.each(app._formLayer.fields, function(i, v){
+              if (v.cascade === 'affirmative'){
+                _affirmativeFormFields.push(v.name)  
+              }else if (v.cascade === 'neggative'){
+                _neggativeFormFields.push(v.name)  
+              } 
+            }); 
           };
           _affirmativeHideQuestionsBelow = function(){
            $.each(_affirmativeFormFields, function(n, id){
-             if($('#' + id + 'Yes, [id="' + id +'Yes (commercial only)"]').is(':checked')) { 
+             if($('#' + id + 'Yes, [id="' + id +'Yes"]').is(':checked')) { 
                 console.log(id);
                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
-             } else if($('#' + id + 'No, [id="' + id +'Yes (commercial/residential, more than 3 units)"]').is(':checked')) { 
+             } else if($('#' + id + 'No').is(':checked')) { 
                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
              }
            });
          },
           //Hide all questions below the current question if response is 'no'
           _neggativeHideQuestionsBelow = function(){
-            $.each(_neggativeFormFields, function(id, v){
+            $.each(_neggativeFormFields, function(n, id){
               if($('#' + id + 'No').is(':checked')) { 
-                $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
               } else if($('#' + id + 'Yes').is(':checked')) { 
-                $geoFormQuestionare.has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
               }
             });
           },
           _init = (function(){
-           _compileCascadeFields();
-           $('body').on('click', function(){
-             _affirmativeHideQuestionsBelow();
-             _neggativeHideQuestionsBelow(); 
-           })  
+            var intervalCheck = setInterval(function(){
+              if (app._formLayer !== undefined){
+                _compileCascadeFields();
+                $('body').on('click', function(){
+                  _affirmativeHideQuestionsBelow();
+                  _neggativeHideQuestionsBelow(); 
+                }) 
+                clearInterval(intervalCheck);
+              }
+            }, 1000); 
           })();
         },
 
