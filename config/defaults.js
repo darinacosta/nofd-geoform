@@ -16,7 +16,7 @@ define({
       "nofd_geoform_v4_398": [
         {"name":"SURVEY_DATE","alias":"Date and time of survey:","isEditable":true,"tooltip":"","visible":true,"format":null},
         {"name":"MEMBER","alias":"Your name: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text", "validate": true},
-        {"name":"COMPANY","alias":"Your company: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text", "vaidate": true},
+        {"name":"COMPANY","alias":"Your company: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text", "validate": true},
         {"name":"Address", "alias":"Location address:","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"LOT_VACANT","alias":"Is the lot vacant?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio", "cascade": "affirmative"},
         {"name":"BLIGHTED_DANGEROUS","alias":"Is it blighted or dangerous?","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"radio"},

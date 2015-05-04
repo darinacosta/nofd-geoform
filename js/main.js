@@ -375,8 +375,7 @@ define([
           _fieldValidationArray = function(){
             $.each(app._formLayer.fields, function(i, v){
               if (v.validate === true){
-                console.log('VALIDATE ' + v.name)
-              validationArray.push(v.name)
+                validationArray.push(v.name)
               }
             });
             return validationArray;
