@@ -115,7 +115,7 @@ define([
             // options object
             var options = {
                 map: this.map,
-                autoComplete: true //djacosta edit "true" from "hasEsri"
+                autoComplete: "hasEsri"
             };
             //If there is a valid search id and field defined add the feature layer to the geocoder array
             var searchLayers = [];
@@ -383,7 +383,7 @@ define([
           _generateValidationString = function(){
             var string = '';
             $.each(_fieldValidationArray(), function(n,id){
-              if (!$('[id^="' + id + '"]').parent().hasClass('cnoHide')){
+              if (!$('[id^="' + id + '"]').parent().hasClass('hide')){
                 if (n == 0){
                   string += '#' + id 
                 } else {
@@ -415,9 +415,9 @@ define([
            $.each(_affirmativeFormFields, function(n, id){
              if($('#' + id + 'Yes, [id="' + id +'Yes"]').is(':checked')) { 
                 console.log(id);
-               $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+               $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "hide" )
              } else if($('#' + id + 'No').is(':checked')) { 
-               $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+               $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "hide" )
              }
            });
          },
@@ -425,9 +425,9 @@ define([
           _neggativeHideQuestionsBelow = function(){
             $.each(_neggativeFormFields, function(n, id){
               if($('#' + id + 'No').is(':checked')) { 
-                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "cnoHide" )
+                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().addClass( "hide" )
               } else if($('#' + id + 'Yes').is(':checked')) { 
-                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "cnoHide" )
+                $( ".geoFormQuestionare" ).has( '[id^="' + id + '"]' ).nextAll().removeClass( "hide" )
               }
             });
           },
