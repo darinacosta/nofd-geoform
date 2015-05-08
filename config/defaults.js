@@ -3,9 +3,9 @@ define({
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings
     //and url parameters.
     "appid": "",
-    "webmap": "239beb3874bd4251a38f817ed093678f",
+    "webmap": "11aebc9a95a845cf87604903c1dd126a",
     "form_layer": {
-        "id": "nofd_geoform_v4_398"
+        "id": "nofd_geoform_staging_v1_4347"
     },
     "details": {
         "Title": "NOFD Smoke Alarm Survey",
@@ -13,7 +13,7 @@ define({
         "Description": ""
     },
     "fields": {
-      "nofd_geoform_v4_398": [
+      "nofd_geoform_staging_v1_4347": [
         {"name":"SURVEY_DATE","alias":"Date and time of survey:","isEditable":true,"tooltip":"","visible":true,"format":null},
         {"name":"MEMBER","alias":"Your name: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
         {"name":"COMPANY","alias":"Your company: (required)","isEditable":true,"tooltip":"","visible":true,"format":null,"displayType":"text"},
