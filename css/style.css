@@ -31,6 +31,10 @@
     color:red;
 }
 
+#mapDiv{
+    pointer-events: none;
+}
+
 
 /**DJACOSTA EDITS: JQUERY UI**8/
 
